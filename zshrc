@@ -1,15 +1,3 @@
-#
-# Executes commands at the start of an interactive session.
-#
-# Authors:
-#   Sorin Ionescu <sorin.ionescu@gmail.com>
-#
-
-# Source Prezto.
-if [[ -s "${ZDOTDIR:-$HOME}/.zprezto/init.zsh" ]]; then
-  source "${ZDOTDIR:-$HOME}/.zprezto/init.zsh"
-fi
-
 export PATH=/home/$USER/bin:$PATH
 
 # Customize to your needs...
@@ -23,8 +11,7 @@ setopt interactivecomments
 set -o vi
 stty stop undef
 
-alias vi='nvim'
-alias se='emacsclient -c'
+alias vi='nvr'
 alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
@@ -57,7 +44,7 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 fe() {
   local files
   IFS=$'\n' files=($(fzf --query="$1" --multi --select-1 --exit-0))
-  [[ -n "$files" ]] && ${EDITOR:-vim} "${files[@]}"
+  [[ -n "$files" ]] && vi "${files[@]}"
 }
 
 # fd - cd to selected directory
@@ -77,7 +64,7 @@ vf() {
 
   if [[ -n $files ]]
   then
-     ${EDITOR} -- $files
+     vi -- $files
      print -l $files[1]
   fi
 }
