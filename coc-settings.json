@@ -94,5 +94,7 @@
   "suggest.noselect": false,
   "coc.preferences.diagnostic.displayByAle": true,
   "suggest.disableMenuShortcut": true,
-  "coc.preferences.currentFunctionSymbolAutoUpdate": true
+  "coc.source.buffer.enable": false,
+  "coc.source.around.enable": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": false
 }
