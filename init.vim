@@ -44,6 +44,8 @@ Plug 'yegappan/mru'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'benmills/vimux'
 Plug 'itchyny/lightline.vim'
+Plug 'airblade/vim-rooter'
+
 call plug#end()
 
 let g:VimuxHeight = "30"
@@ -59,7 +61,7 @@ let g:python_host_prog='/usr/bin/python2'
 " nnoremap <silent> K :ALEHover<CR>
 " nnoremap <silent> gd :sp \| ALEGoToDefinition \| res 20<CR> zz
 " auto complete
-let g:ale_linters = {'cpp': ['cquery'], 'c':['cquery'], 'cc':['cquery']}
+let g:ale_linters = {'cpp': ['cquery'], 'c':['cquery'], 'cc':['cquery'], 'python':['flake8', 'pylint']}
 " let g:ale_cpp_clangtidy_executable = "clang-tidy.par"
 " let g:ale_fixers = {'cpp': ['clang-format']}
 let g:ale_completion_enabled = 0
@@ -74,8 +76,21 @@ let g:ale_set_loclist = 0
 let g:ale_lint_on_text_changed = 'never'
 let g:ale_close_preview_on_insert = 1
 let g:ale_fixers = {'python': ['isort', 'black']}
+" autocmd BufNewFile,BufRead TARGETS let b:ale_fixers = []
+" autocmd BufNewFile,BufRead TARGETS let b:ale_linters = []
+autocmd BufNewFile,BufRead BUCK let b:ale_fixers = []
+let g:ale_pattern_options = {'TARGETS': {'ale_fixers': []} }
 " let g:ale_cpp_clangtidy_checks = ['*']
-
+let g:ale_lint_on_enter = 1
+let g:ale_python_autopep8_use_global=1
+let g:ale_python_flake8_use_global=1
+let g:ale_python_isort_use_global=1
+let g:ale_python_mypy_use_global=1
+let g:ale_python_mypy_options='--ignore-missing-imports'
+let g:ale_python_pycodestyle_use_global=1
+let g:ale_python_pylint_use_global=1
+let g:ale_python_yapf_use_global=1
+let g:ale_echo_msg_format = '[%linter%] %s'
 
 
 autocmd! FileType fzf
@@ -113,11 +128,12 @@ set clipboard=unnamed
 " set clipboard+=unnamedplus
 
 " auto format python file when close
-autocmd BufWritePost */mysql/mysql-fork/* silent! exec "!pushd ~/mysql/mysql-fork && git diff --no-color -U0 | clang-format-diff.py -i -p1" |:e
+autocmd BufWritePost */mysql/5.6/* silent! exec "!pushd ~/mysql/5.6 && git diff --no-color -U0 | clang-format-diff.py -i -p1" |:e
+autocmd BufWritePost */mysql/8.0/* silent! exec "!pushd ~/mysql/8.0 && git diff --no-color -U0 | clang-format-diff.py -i -p1" |:e
 autocmd BufWritePost TARGETS silent! exec "!~/fbsource/tools/third-party/buildifier/run_buildifier.py -i %" |:e
 " for window
 set splitbelow
-
+set splitright
 
 " auto format buck
 
@@ -156,12 +172,19 @@ if &term =~# '^screen'
     let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 endif
 
+if exists('+termguicolors')
+  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
 set updatetime=500
 let g:lsp_preview_keep_focus=0
 
 " coc config start
 set hidden
 let g:coc_node_path = expand("/data/users/$USER/fbsource/xplat/third-party/node/bin/node")
+set completeopt=longest
 
 let g:coc_filetype_map = {'cc': 'cpp'}
 " use <tab> for trigger completion and navigate to the next complete item
@@ -178,6 +201,16 @@ set signcolumn=yes
 " coc config end
 "
 
+" alacritty has a bug for this cursor 
+" set guicursor=
+"
+"
+
+function! TmuxVimConfig()
+  let g:tmux_navigator_disable_when_zoomed = 1
+endfunction
+
+call TmuxVimConfig()
 
 " ======================================remote-copy======================================
 function! PbCopy() range
@@ -253,6 +286,14 @@ function! KeyMapSetup()
   nnoremap P p<cr>
 
   " Toggele Nerd Tree
-  map <space>n :NERDTreeToggle<CR>
+  map <space>n :NERDTreeToggle %<CR>
+  map <space>cn :NERDTree %<CR>
 endfunction
 call KeyMapSetup()
+
+
+function! VimRooterConfig()
+  let g:rooter_tagets = '/data/users/zhichengzhu/mysql/, /data/users/zhichengzhu/fbsource/,*'
+  let g:rooter_patterns = ['.git/', '.hg/']
+endfunction
+call VimRooterConfig()

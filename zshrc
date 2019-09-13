@@ -84,6 +84,7 @@ fkill() {
   }
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
+# bindkey '^' autosuggest-accept
 
 msd() { bash -c "source ~/mysql/tools/mysqldebugging.sh && $*" }
 dl() { bash -c "source /usr/facebook/scripts/db/dba_lib.sh && $*" }
@@ -93,3 +94,6 @@ source ~/mysql/tools/mysqldebugging.sh
 export PYENV_ROOT="/usr/local/bin/pyenv"
 
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
+
+export NVIM_LISTEN_ADDRESS=/tmp/nvimsocket 
+
