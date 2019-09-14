@@ -11,7 +11,7 @@ setopt interactivecomments
 set -o vi
 stty stop undef
 
-alias vi='nvr'
+alias vi='nvim'
 alias cp='cp --backup=numbered'
 alias ln='ln --backup=numbered'
 alias mv='mv -f --backup=numbered'
