@@ -6,7 +6,7 @@ else
   source $ADMIN_SCRIPTS/master.vimrc
 endif
 
-source /home/engshare/admin/scripts/vim/biggrep.vim
+source $LOCAL_ADMIN_SCRIPTS/vim/biggrep.vim
 
 " Specify a directory for plugins
 " - For Neovim: ~/.local/share/nvim/plugged
@@ -45,7 +45,7 @@ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'benmills/vimux'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
-
+Plug 'morhetz/gruvbox'
 call plug#end()
 
 let g:VimuxHeight = "30"
@@ -115,7 +115,8 @@ set rtp+=/usr/local/share/myc/vim
 " Replace with a keybind you like
 nmap <space>t :MYC<CR>
 
-colorscheme NeoSolarized
+" colorscheme NeoSolarized
+colorscheme gruvbox
 set background=dark
 
 
@@ -293,7 +294,7 @@ call KeyMapSetup()
 
 
 function! VimRooterConfig()
-  let g:rooter_tagets = '/data/users/zhichengzhu/mysql/, /data/users/zhichengzhu/fbsource/,*'
+  let g:rooter_tagets = '/home/zhichengzhu/mysql/, /data/users/zhichengzhu/fbsource/,*'
   let g:rooter_patterns = ['.git/', '.hg/']
 endfunction
 call VimRooterConfig()
