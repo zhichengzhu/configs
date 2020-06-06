@@ -89,7 +89,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=7'
 msd() { bash -c "source ~/mysql/tools/mysqldebugging.sh && $*" }
 dl() { bash -c "source /usr/facebook/scripts/db/dba_lib.sh && $*" }
 
-source ~/mysql/tools/mysqldebugging.sh
+# source ~/mysql/tools/mysqldebugging.sh
 
 export PYENV_ROOT="/usr/local/bin/pyenv"
 

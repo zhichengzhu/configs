@@ -1,12 +1,12 @@
 {
   "languageserver": {
-    "cquery": {
-      "command": "/usr/bin/cquery-language-server",
-      "args": ["--log-file=/tmp/cq.log"],
+    "clangd": {
+      "enable":true,
+      "command": "/data/users/$USER/fbsource/fbcode/editor_support/vim/cppls_fbcode_wrapper",
       "filetypes": ["c", "cpp", "cc"],
       "rootPatterns": [".buckconfig", "compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
       "initializationOptions": {
-        "cacheDirectory": "/tmp/cquery",
+        "cacheDirectory": "/tmp/clangd-log",
         "index": {
           "blacklist": [".*/buck-out/.*", ".*/third-party-buck/.*", ".*/_build.*/.*"]
         },
@@ -24,7 +24,7 @@
       }
     },
     "python": {
-      "command": "/data/users/zhichengzhu/fbsource/fbcode/experimental/gwicke/vim/fbcode_pyls_wrapper",
+      "command": "/usr/local/bin/pyls-language-server",
       "args": [
       ],
       "trace.server": "verbose",
@@ -87,6 +87,7 @@
       }
     }
   },
+  "http.proxy": "fwdproxy:8080",
   "suggest.triggerAfterInsertEnter": true,
   "suggest.minTriggerInputLength": 2,
   "suggest.acceptSuggestionOnCommitCharacter": true,

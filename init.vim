@@ -41,7 +41,10 @@ Plug 'christoomey/vim-tmux-navigator'
 Plug 'roxma/vim-tmux-clipboard'
 Plug 'tmux-plugins/vim-tmux-focus-events'
 Plug 'yegappan/mru'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+" Use release branch (Recommend)
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Or build from source code by use yarn: https://yarnpkg.com
+Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
 Plug 'benmills/vimux'
 Plug 'itchyny/lightline.vim'
 Plug 'airblade/vim-rooter'
@@ -61,7 +64,8 @@ let g:python_host_prog='/usr/bin/python2'
 " nnoremap <silent> K :ALEHover<CR>
 " nnoremap <silent> gd :sp \| ALEGoToDefinition \| res 20<CR> zz
 " auto complete
-let g:ale_linters = {'cpp': ['cquery'], 'c':['cquery'], 'cc':['cquery'], 'python':['flake8', 'pylint']}
+let g:ale_python_pyls_executable = '/usr/local/bin/pyls-language-server'
+let g:ale_linters = {'cpp': ['cppls_fbcode'], 'c':['cppls_fbcode'], 'cc':['cppls_fbcode'], 'python':['flake8', 'pyls']}
 " let g:ale_cpp_clangtidy_executable = "clang-tidy.par"
 " let g:ale_fixers = {'cpp': ['clang-format']}
 let g:ale_completion_enabled = 0
