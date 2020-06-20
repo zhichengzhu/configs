@@ -123,7 +123,7 @@ colorscheme gruvbox
 set background=dark
 
 
-set t_Co=256
+" set t_Co=256
 " set termguicolors
 
 set clipboard=unnamed
